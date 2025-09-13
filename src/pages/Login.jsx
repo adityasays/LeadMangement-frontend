@@ -12,7 +12,11 @@ function Login() {
     try {
       const res = await api.post('/api/auth/login', { email, password });
       console.log('Logged in user:', res.data.user);
-      navigate('/dashboard');
+      
+      
+      navigate('/dashboard', { 
+        state: { user: res.data.user }
+      });
     } catch (err) {
       console.error('Login failed:', err.response?.data?.message || err.message);
       alert(err.response?.data?.message || 'Login failed');
